@@ -23,7 +23,7 @@ def get_response(param):
 def get_answer():
     for question in QUESTIONS:
         get_response(question)
-
+    return QUESTIONS['адрес отправления'][0], QUESTIONS['адрес назначения'][0], QUESTIONS['заезд']
 
 
 if __name__ == '__main__':
