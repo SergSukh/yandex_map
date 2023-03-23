@@ -1,19 +1,11 @@
 import time
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
-from browser import URL, br_wait, br_wait2el_click, browser
+from browser import URL, br_wait, br_wait2el_click, browser, click_button
 from oper2css import OPER_CSS
 from params import get_params
 from route import get_adress_field, get_route
-
-
-def click_button(els, name):
-    el = els.find_element(By.CLASS_NAME, name)
-    el.click()
-
 
   
 def main(adress_1, adress_2):
@@ -41,12 +33,14 @@ def main(adress_1, adress_2):
 
 
 def test():
+    start = time.time()
     adress_1 = 'тольяттиб карбышева, 15'
     adress_2 = 'cfhfnjd, ctntdfz 7'
     assert (main(adress_1, adress_2) == '420 км, Без учета пробок')
     adress_1 = '53.506202, 49.422735'
     adress_2 = 'Ыфкфещмб Сетеваяб 7'
     assert (main(adress_1, adress_2) == '430 км, Без учета пробок')
+    return f'test - Ok. test_time = {time.time()-start}'
 
 if __name__ == '__main__':
     print(test())

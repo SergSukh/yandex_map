@@ -1,5 +1,3 @@
-from phantomjs import Phantom
-from selenium import webdriver
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -15,7 +13,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 # options.add_argument("start-maximized")
-# options.add_argument("--headless")
+options.add_argument("--headless")
 
 # защищаем наш IP
 options.set_capability("media.peerconnection.enabled", False)
@@ -25,7 +23,7 @@ options.set_capability("dom.webnotifications.enabled", False)
 
 # убираем отслеживание включенного удаленного управления
 options.set_capability("dom.webdriver.enabled", False)
-browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+browser = Chrome(ChromeDriverManager().install(), options=options)
 
 
 def br_wait(browser, block):
@@ -37,3 +35,8 @@ def br_wait2el_click(browser, block, el_css):
     br = br_wait(browser, block)
     el = br.find_elements(By.CLASS_NAME, el_css)
     return el
+
+
+def click_button(els, name):
+    el = els.find_element(By.CLASS_NAME, name)
+    el.click()
